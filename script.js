@@ -1,4 +1,4 @@
-const Gameboard = function () {
+const Gameboard = (function () {
   let board = [];
 
   const initializeBoard = () => {
@@ -28,7 +28,7 @@ const Gameboard = function () {
     setCell,
     clearBoard,
   };
-};
+})();
 
 function Player(name, marker) {
   const getName = () => name;
@@ -40,9 +40,9 @@ function Player(name, marker) {
   };
 }
 
-const GameController = function () {
+const GameController = (function () {
   let currentPlayer;
-  let player = [];
+  let players = [];
   let gameStatus = false;
   let gameboard;
 
@@ -56,4 +56,22 @@ const GameController = function () {
     [0, 4, 8],
     [2, 4, 6],
   ];
-};
+
+  const init = () => {};
+  const playerMove = (index) => {};
+  const checkWin = () => {};
+  const checkDraw = () => {};
+  const resetGame = () => {};
+  const getCurrentPlayer = () => {};
+  const getWinPlayer = () => {};
+  const isGameOver = () => {};
+
+  return {
+    init,
+    playerMove,
+    resetGame,
+    getCurrentPlayer,
+    getWinPlayer,
+    isGameOver,
+  };
+})();
