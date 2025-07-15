@@ -30,7 +30,7 @@ const Gameboard = function () {
   };
 };
 
-function createPlayer(name, marker) {
+function Player(name, marker) {
   const getName = () => name;
   const getMarker = () => marker;
 
@@ -39,3 +39,21 @@ function createPlayer(name, marker) {
     getMarker,
   };
 }
+
+const GameController = function () {
+  let currentPlayer;
+  let player = [];
+  let gameStatus = false;
+  let gameboard;
+
+  const winnerLines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+};
