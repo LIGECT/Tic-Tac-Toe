@@ -44,7 +44,6 @@ const GameController = (function () {
   let currentPlayer;
   let players = [];
   let gameStatus = false;
-  let gameboard;
 
   const winnerLines = [
     [0, 1, 2],
@@ -57,14 +56,78 @@ const GameController = (function () {
     [2, 4, 6],
   ];
 
-  const init = () => {};
-  const playerMove = (index) => {};
-  const checkWin = () => {};
-  const checkDraw = () => {};
-  const resetGame = () => {};
-  const getCurrentPlayer = () => {};
-  const getWinPlayer = () => {};
-  const isGameOver = () => {};
+  let winner = null;
+
+  const init = () => {
+    players = [Player("Player X", "X"), Player("Player O", "O")];
+    currentPlayer = players[0];
+    Gameboard.clearBoard();
+    winner = null;
+    gameStatus = true;
+
+    console.log(`Game start! Current player ${currentPlayer.getName()}`);
+  };
+
+  const playerMove = (index) => {
+    if (!gameStatus) {
+      console.log("Game is over. Please start a new game.");
+      return false;
+    }
+
+    if (!Gameboard.setCell(index, currentPlayer.getMarker())) {
+      console.log("Cell is already taken.");
+      return false;
+    }
+
+    if (checkWin()) {
+      gameStatus = false;
+      winner = currentPlayer;
+      console.log(`${winner.getName()} победил!`);
+    } else if (checkDraw()) {
+      gameStatus = false;
+      winner = null;
+      console.log("Ничья");
+    } else {
+      currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+      console.log("Следующий ход:", currentPlayer.getName());
+    }
+
+    return true;
+  };
+
+  const checkWin = () => {
+    const currentBoard = Gameboard.getBoard();
+
+    for (const lines of winnerLines) {
+      const [a, b, c] = lines;
+
+      if (
+        currentBoard[a] !== null &&
+        currentBoard[a] === currentBoard[b] &&
+        currentBoard[a] === currentBoard[c]
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const checkDraw = () => {
+    const currentBoard = Gameboard.getBoard();
+
+    const AllCellFilled = currentBoard.every((cell) => cell !== null);
+
+    return AllCellFilled && !checkWin();
+  };
+
+  const resetGame = () => {
+    init();
+    console.log("Game has been reset.");
+  };
+
+  const getCurrentPlayer = () => currentPlayer;
+  const getWinPlayer = () => winner;
+  const isGameOver = () => !gameStatus;
 
   return {
     init,
