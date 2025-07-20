@@ -31,12 +31,19 @@ const Gameboard = (function () {
 })();
 
 function Player(name, marker) {
+  let score = 0;
   const getName = () => name;
   const getMarker = () => marker;
+  const getScore = () => score;
+  const addWin = () => {
+    score++;
+  };
 
   return {
     getName,
     getMarker,
+    getScore,
+    addWin,
   };
 }
 
@@ -82,6 +89,7 @@ const GameController = (function () {
     if (checkWin()) {
       gameStatus = false;
       winner = currentPlayer;
+      winner.addWin();
       console.log(`${winner.getName()} победил!`);
     } else if (checkDraw()) {
       gameStatus = false;
@@ -135,6 +143,7 @@ const GameController = (function () {
     resetGame,
     getCurrentPlayer,
     getWinPlayer,
+    getPlayers: () => players,
     isGameOver,
     getBoard: Gameboard.getBoard,
   };
