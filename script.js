@@ -115,9 +115,9 @@ const GameController = (function () {
   const checkDraw = () => {
     const currentBoard = Gameboard.getBoard();
 
-    const AllCellFilled = currentBoard.every((cell) => cell !== null);
+    const allCellFilled = currentBoard.every((cell) => cell !== null);
 
-    return AllCellFilled && !checkWin();
+    return allCellFilled && !checkWin();
   };
 
   const resetGame = () => {
@@ -136,5 +136,6 @@ const GameController = (function () {
     getCurrentPlayer,
     getWinPlayer,
     isGameOver,
+    getBoard: Gameboard.getBoard,
   };
 })();

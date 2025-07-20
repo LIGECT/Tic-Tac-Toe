@@ -4,9 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Tic Tac Toe</title>
+    <title>Tic Tac Toe: Neon Fight</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <header class="cap">
+      <h1>Tic Tac Toe</h1>
+      <p>Every click is a shot. Hesitate — and you're dead.</p>
+    </header>
+
+    <main class="game-layout">
+      <div class="player-card">
+        <h2>Player X</h2>
+        <div>0 wins</div>
+      </div>
+
+      <div class="game-board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+
+      <div class="player-card">
+        <h2>Player O</h2>
+        <div>0 wins</div>
+      </div>
+    </main>
+
+    <footer class="status-blocks">
+      <div class="current-move">Turn: <span>X</span></div>
+      <div class="game-score">Score: <span>0 - 0</span></div>
+    </footer>
     <script src="./script.js"></script>
   </body>
 </html>
