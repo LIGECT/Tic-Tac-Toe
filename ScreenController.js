@@ -1,11 +1,11 @@
 const ScreenController = (function (GameController, Gameboard) {
   const ourGameBoard = document.getElementById("game-board");
-  const mainResetButton = document.getElementById("reset-button");
+  const resetButton = document.getElementById("reset-button");
   const allTheStatusBar = document.getElementById("status-massage");
 
   const renderBoard = () => {
     ourGameBoard.innerHTML = "";
-    const board = Gameboard.clearBoard();
+    const board = Gameboard.getBoard();
 
     board.forEach((cell, index) => {
       const createCell = document.createElement("button");
@@ -24,10 +24,10 @@ const ScreenController = (function (GameController, Gameboard) {
       if (winner) {
         allTheStatusBar.textContent = `${winner.getName()} Победитель!`;
       } else {
-        allTheStatusBar.textContent = "Ничья";
+        allTheStatusBar.textContent = "Draw — Nobody survived";
       }
     } else {
-      allTheStatusBar.textContent = `Текущий игрок ${GameController.getCurrentPlayer().getName()}`;
+      allTheStatusBar.textContent = `Current player - ${GameController.getCurrentPlayer().getName()}`;
     }
   };
 
@@ -41,4 +41,22 @@ const ScreenController = (function (GameController, Gameboard) {
       renderBoard();
     }
   };
-})();
+
+  resetButton.addEventListener("click", () => {
+    GameController.resetGame();
+    renderBoard();
+  });
+
+  const init = () => {
+    GameController.init();
+    renderBoard();
+  };
+
+  return {
+    init,
+  };
+})(GameController, Gameboard);
+
+document.addEventListener("DOMContentLoaded", () => {
+  ScreenController.init();
+});
