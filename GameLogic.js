@@ -65,13 +65,18 @@ const GameController = (function () {
 
   let winner = null;
 
-  const init = () => {
-    players = [Player("Player X", "X"), Player("Player O", "O")];
+  const startNewRound = () => {
     currentPlayer = players[0];
     Gameboard.clearBoard();
     winner = null;
     gameStatus = true;
 
+    console.log(`Game start! Current player ${currentPlayer.getName()}`);
+  };
+
+  const init = () => {
+    players = [Player("Player X", "X"), Player("Player O", "O")];
+    startNewRound();
     console.log(`Game start! Current player ${currentPlayer.getName()}`);
   };
 
@@ -129,7 +134,7 @@ const GameController = (function () {
   };
 
   const resetGame = () => {
-    init();
+    startNewRound();
     console.log("Game has been reset.");
   };
 
