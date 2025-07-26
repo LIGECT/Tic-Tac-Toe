@@ -80,12 +80,27 @@ body {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.096);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+  text-transform: uppercase;
 }
 
 .cell:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-5px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cell.cell-x {
+  color: var(--neon-x);
+  text-shadow: 0 0 5px #fff, 0 0 20px var(--neon-x);
+}
+
+.cell.cell-0 {
+  color: var(--neon-0);
+  text-shadow: 0 0 5px #fff, 0 0 20px var(--neon-0);
 }
 
 .status-blocks {
@@ -97,7 +112,7 @@ body {
   font-size: 1.5rem;
 }
 
-.current-move,
+#status-massage,
 .game-score {
   width: 265px;
   padding: 15px;

@@ -14,6 +14,10 @@ const ScreenController = (function (GameController, Gameboard) {
       createCell.classList.add("cell");
       createCell.dataset.index = index;
 
+      if (cell) {
+        createCell.classList.add(`cell-${cell.toLowerCase()}`);
+      }
+
       createCell.textContent = cell || "";
       createCell.addEventListener("click", () => clickHandler(index));
 
@@ -29,7 +33,7 @@ const ScreenController = (function (GameController, Gameboard) {
         allTheStatusBar.textContent = "Draw — Nobody survived";
       }
     } else {
-      allTheStatusBar.textContent = `Current player - ${GameController.getCurrentPlayer().getName()}`;
+      allTheStatusBar.textContent = `Current player ${GameController.getCurrentPlayer().getName()}`;
     }
     updateScoreDisplay();
   };
