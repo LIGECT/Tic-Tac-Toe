@@ -103,6 +103,15 @@ body {
   text-shadow: 0 0 5px #fff, 0 0 20px var(--neon-0);
 }
 
+.winning-cell {
+  border-color: #fff;
+  box-shadow: 0 0 10px #fff, 0 0 20px rgba(255, 255, 255, 0.6),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  z-index: 2;
+  animation: scale-win 1.2s infinite alternate;
+  will-change: transform;
+}
+
 .status-blocks {
   display: flex;
   justify-content: center;
@@ -143,4 +152,12 @@ body {
 .reset-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
+}
+@keyframes scale-win {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }

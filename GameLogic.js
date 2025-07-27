@@ -64,11 +64,13 @@ const GameController = (function () {
   ];
 
   let winner = null;
+  let victoryLine = null;
 
   const startNewRound = () => {
     currentPlayer = players[0];
     Gameboard.clearBoard();
     winner = null;
+    victoryLine = null;
     gameStatus = true;
 
     console.log(`Game start! Current player ${currentPlayer.getName()}`);
@@ -77,7 +79,6 @@ const GameController = (function () {
   const init = () => {
     players = [Player("Player X", "X"), Player("Player O", "O")];
     startNewRound();
-    console.log(`Game start! Current player ${currentPlayer.getName()}`);
   };
 
   const playerMove = (index) => {
@@ -90,10 +91,11 @@ const GameController = (function () {
       console.log("Cell is already taken.");
       return false;
     }
-
-    if (checkWin()) {
+    const winResult = checkWin();
+    if (winResult) {
       gameStatus = false;
       winner = currentPlayer;
+      victoryLine = winResult;
       winner.addWin();
       console.log(`${winner.getName()} победил!`);
     } else if (checkDraw()) {
@@ -111,18 +113,18 @@ const GameController = (function () {
   const checkWin = () => {
     const currentBoard = Gameboard.getBoard();
 
-    for (const lines of winnerLines) {
-      const [a, b, c] = lines;
+    for (const line of winnerLines) {
+      const [a, b, c] = line;
 
       if (
         currentBoard[a] !== null &&
         currentBoard[a] === currentBoard[b] &&
         currentBoard[a] === currentBoard[c]
       ) {
-        return true;
+        return line;
       }
     }
-    return false;
+    return null;
   };
 
   const checkDraw = () => {
@@ -141,6 +143,7 @@ const GameController = (function () {
   const getCurrentPlayer = () => currentPlayer;
   const getWinPlayer = () => winner;
   const isGameOver = () => !gameStatus;
+  const getVictoryLine = () => victoryLine;
 
   return {
     init,
@@ -148,6 +151,7 @@ const GameController = (function () {
     resetGame,
     getCurrentPlayer,
     getWinPlayer,
+    getVictoryLine,
     getPlayers: () => players,
     isGameOver,
     getBoard: Gameboard.getBoard,

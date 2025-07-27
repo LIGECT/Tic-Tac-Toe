@@ -1,13 +1,14 @@
 const ScreenController = (function (GameController, Gameboard) {
-  const ourGameBoard = document.getElementById("game-board");
+  const gameBoardElement = document.getElementById("game-board");
   const resetButton = document.getElementById("reset-button");
-  const allTheStatusBar = document.getElementById("status-massage");
+  const statusMessageElement = document.getElementById("status-massage");
   const scorePlayerX = document.getElementById("player-x-score");
   const scorePlayerO = document.getElementById("player-o-score");
 
   const renderBoard = () => {
-    ourGameBoard.innerHTML = "";
+    gameBoardElement.innerHTML = "";
     const board = Gameboard.getBoard();
+    const victoryLine = GameController.getVictoryLine();
 
     board.forEach((cell, index) => {
       const createCell = document.createElement("button");
@@ -18,22 +19,26 @@ const ScreenController = (function (GameController, Gameboard) {
         createCell.classList.add(`cell-${cell.toLowerCase()}`);
       }
 
+      if (victoryLine && victoryLine.includes(index)) {
+        createCell.classList.add("winning-cell");
+      }
+
       createCell.textContent = cell || "";
       createCell.addEventListener("click", () => clickHandler(index));
 
-      ourGameBoard.appendChild(createCell);
+      gameBoardElement.appendChild(createCell);
     });
 
     if (GameController.isGameOver()) {
       const winner = GameController.getWinPlayer();
 
       if (winner) {
-        allTheStatusBar.textContent = `${winner.getName()} wins!`;
+        statusMessageElement.textContent = `${winner.getName()} wins!`;
       } else {
-        allTheStatusBar.textContent = "Draw — Nobody survived";
+        statusMessageElement.textContent = "Draw — Nobody survived";
       }
     } else {
-      allTheStatusBar.textContent = `Current player ${GameController.getCurrentPlayer().getName()}`;
+      statusMessageElement.textContent = `Current player ${GameController.getCurrentPlayer().getName()}`;
     }
     updateScoreDisplay();
   };
