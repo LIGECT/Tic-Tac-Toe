@@ -222,3 +222,48 @@ body {
     transform: scale(1.1);
   }
 }
+
+@media (max-width: 950px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .game-board {
+    width: 60vw;
+    max-width: 400px;
+  }
+
+  .player-card {
+    width: 60vw;
+    max-width: 400px;
+  }
+
+  .status-blocks {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cap > *:first-child {
+    font-size: 2.8em;
+  }
+
+  .cap p {
+    padding: 0 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .game-board,
+  .player-card,
+  #status-massage,
+  .game-score {
+    width: 90vw;
+  }
+
+  .cell {
+    font-size: 4rem;
+  }
+}
