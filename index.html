@@ -16,22 +16,30 @@
       <p>Every click is a shot. Hesitate — and you're dead.</p>
     </header>
 
-    <main class="game-layout">
+    <div class="start-modal" id="start-modal">
+      <div class="modal-content">
+        <h2>Enter Player Names</h2>
+        <input type="text" id="player1-name" placeholder="Player 1 Name (X)" />
+        <input type="text" id="player2-name" placeholder="Player 2 Name (O)" />
+        <button class="reset-button" id="start-game-button">Start Game</button>
+      </div>
+    </div>
+
+    <main class="game-layout hidden" id="game-container">
       <div class="player-card" id="player-x-card">
-        <h2>Player X</h2>
+        <h2 id="player-x-name"></h2>
         <div id="player-x-score"></div>
       </div>
 
       <div class="game-board" id="game-board"></div>
 
       <div class="player-card" id="player-o-card">
-        <h2>Player O</h2>
+        <h2 id="player-o-name"></h2>
         <div id="player-o-score"></div>
       </div>
     </main>
 
     <footer class="status-blocks">
-      <!-- <div class="current-move">Turn: <span id="turn-indicator">X</span></div> -->
       <button class="reset-button" id="reset-button">Rematch?</button>
       <div id="status-massage"></div>
     </footer>

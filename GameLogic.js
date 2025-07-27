@@ -76,8 +76,8 @@ const GameController = (function () {
     console.log(`Game start! Current player ${currentPlayer.getName()}`);
   };
 
-  const init = () => {
-    players = [Player("Player X", "X"), Player("Player O", "O")];
+  const init = (player1Name, player2Name) => {
+    players = [Player(player1Name, "X"), Player(player2Name, "O")];
     startNewRound();
   };
 
