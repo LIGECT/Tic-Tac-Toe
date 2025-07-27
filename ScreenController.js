@@ -7,11 +7,36 @@ const ScreenController = (function (GameController, Gameboard) {
   const playerXNameElement = document.getElementById("player-x-name");
   const playerONameElement = document.getElementById("player-o-name");
   const gameContainer = document.getElementById("game-container");
+  const cardPlayer1 = document.getElementById("player-x-card");
+  const cardPlayer2 = document.getElementById("player-o-card");
 
   const startModal = document.getElementById("start-modal");
   const inputPlayer1 = document.getElementById("player1-name");
   const inputPlayer2 = document.getElementById("player2-name");
   const startGameButton = document.getElementById("start-game-button");
+
+  const validateInputs = () => {
+    const p1Name = inputPlayer1.value.trim();
+    const p2Name = inputPlayer2.value.trim();
+
+    if (p1Name) {
+      inputPlayer1.classList.remove("invalid");
+    } else {
+      inputPlayer1.classList.add("invalid");
+    }
+
+    if (p2Name) {
+      inputPlayer2.classList.remove("invalid");
+    } else {
+      inputPlayer2.classList.add("invalid");
+    }
+
+    startGameButton.disabled = !(p1Name && p2Name);
+  };
+
+  inputPlayer1.addEventListener("input", validateInputs);
+  inputPlayer2.addEventListener("input", validateInputs);
+  validateInputs();
 
   const renderBoard = () => {
     gameBoardElement.innerHTML = "";
@@ -49,6 +74,7 @@ const ScreenController = (function (GameController, Gameboard) {
       statusMessageElement.textContent = `Current player: ${GameController.getCurrentPlayer().getName()}`;
     }
     updateScoreDisplay();
+    updateActivePlayer();
   };
 
   const clickHandler = (index) => {
@@ -97,6 +123,22 @@ const ScreenController = (function (GameController, Gameboard) {
 
     playerXNameElement.textContent = players[0].getName();
     playerONameElement.textContent = players[1].getName();
+  }
+
+  function updateActivePlayer() {
+    cardPlayer1.classList.remove("active");
+    cardPlayer2.classList.remove("active");
+
+    if (GameController.isGameOver()) return;
+
+    const currentPlayers = GameController.getCurrentPlayer();
+    const players = GameController.getPlayers();
+
+    if (currentPlayers === players[0]) {
+      cardPlayer1.classList.add("active");
+    } else {
+      cardPlayer2.classList.add("active");
+    }
   }
 })(GameController, Gameboard);
 
