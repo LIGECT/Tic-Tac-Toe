@@ -1,7 +1,7 @@
 const ScreenController = (function (GameController, Gameboard) {
   const gameBoardElement = document.getElementById("game-board");
   const resetButton = document.getElementById("reset-button");
-  const statusMessageElement = document.getElementById("status-massage");
+  const statusMessageElement = document.getElementById("status-message");
   const scorePlayerX = document.getElementById("player-x-score");
   const scorePlayerO = document.getElementById("player-o-score");
   const playerXNameElement = document.getElementById("player-x-name");
