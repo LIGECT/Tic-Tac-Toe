@@ -176,7 +176,7 @@ body {
   font-size: 1.5rem;
 }
 
-#status-massage,
+#status-message,
 .game-score {
   width: 265px;
   padding: 15px;
@@ -258,7 +258,7 @@ body {
 
   .game-board,
   .player-card,
-  #status-massage,
+  #status-message,
   .game-score {
     width: 90vw;
   }
